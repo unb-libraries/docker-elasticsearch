@@ -1,19 +1,10 @@
-FROM phusion/baseimage
+FROM unblibraries/oracle-jdk8
 MAINTAINER Jacob Sanford <jsanford_at_unb.ca>
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y glusterfs-client
 
 ENV ES_PKG_NAME elasticsearch-1.5.0
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-
-RUN \
-  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update && \
-  apt-get install -y oracle-java8-installer && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk8-installer
 
 # Install Elasticsearch.
 RUN \
