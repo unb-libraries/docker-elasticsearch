@@ -4,15 +4,15 @@ MAINTAINER Jacob Sanford <jsanford_at_unb.ca>
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y glusterfs-client
 
-ENV ES_PKG_NAME elasticsearch-1.5.0
+ENV ELASTICSEARCH_VERSION 1.5.0
 
 # Install Elasticsearch.
 RUN \
   cd / && \
-  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \
-  tar xvzf $ES_PKG_NAME.tar.gz && \
-  rm -f $ES_PKG_NAME.tar.gz && \
-  mv /$ES_PKG_NAME /elasticsearch
+  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
+  tar xvzf elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
+  rm -f elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
+  mv /elasticsearch-$ELASTICSEARCH_VERSION /elasticsearch
 
 # Mount elasticsearch.yml config
 ADD config/elasticsearch/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
